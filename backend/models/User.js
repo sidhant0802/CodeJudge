@@ -27,6 +27,7 @@ const userSchema=new mongoose.Schema({
     role:{
         type: String, 
         enum: ['user', 'admin'], 
+        default: 'user' 
     },
     DateTime:{
         type:Date,
@@ -35,12 +36,16 @@ const userSchema=new mongoose.Schema({
     },
     TotalSubmissions:{
         type:Number,
+        default:0,
     },
     TotalAccepted:{
         type:Number,
         default:0,
     },
-
+    imgPath:{
+        type:String,
+        default:"",
+    },
     Friends:{
         type:[String],
         default:[],
