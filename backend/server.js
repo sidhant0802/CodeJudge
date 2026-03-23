@@ -10,6 +10,7 @@ dotenv.config({path: '.env'});
 const app = express();
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(cookieParser(process.env.CookieSecret));
+// Middleware
 app.use(cors({
   // origin: `${process.env.INSTANCE_IP}:5173`,
   origin: "http://localhost:5173",
