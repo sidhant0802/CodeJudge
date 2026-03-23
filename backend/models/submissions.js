@@ -1,11 +1,5 @@
 const mongoose=require('mongoose');
 const SubmissionSchema=new mongoose.Schema({
-    // SID:{
-    //     type:Number,
-    //     default:null,
-    //     required:true,
-    //     unique:true,
-    // },
     code:{
         type:String,
         default:null,
@@ -49,10 +43,6 @@ const SubmissionSchema=new mongoose.Schema({
         default:0,
         required:true,
     },
-    Memory:{
-        type:Number,
-        default:0,
-        required:true,
-    }
+
 });
 module.exports=mongoose.model("Submissions",SubmissionSchema);
