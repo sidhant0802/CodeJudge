@@ -9,5 +9,9 @@ router.post('/create',auth(["admin"]), exampleController.create);
 router.get('/read/:id',  exampleController.read);
 // router.get('/readall',auth(["admin","user"]), exampleController.readall);
 router.get('/readall',   exampleController.readall);
+router.put('/update/:id',auth(["admin"]), exampleController.update);
+router.delete('/delete/:id',auth(["admin"]),exampleController.delete);
+
+
 // router.post('/login', exampleController.login);
 module.exports = router;

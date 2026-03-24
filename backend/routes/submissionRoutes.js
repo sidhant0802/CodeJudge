@@ -58,5 +58,9 @@ const auth = require('../middleware/auth.js');
 router.get('/read',          exampleController.read);
 router.get('/readbyPID/:id', exampleController.readbyPID);
 
+// 🔒 PROTECTED
+router.get('/readbyhandle',  auth(["admin","user"]), exampleController.readbyhandle);
+router.post('/create',       auth(["admin","user"]), exampleController.create);
+router.delete('/delete/:id', auth(["admin"]),        exampleController.delete);
 
 module.exports = router;
