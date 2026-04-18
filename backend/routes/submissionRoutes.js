@@ -48,19 +48,16 @@
 // module.exports = router;
 
 
-
 const express = require('express');
 const router = express.Router();
-const exampleController = require('../controllers/SubmissionController.js');
+const submissionController = require('../controllers/SubmissionController.js');
 const auth = require('../middleware/auth.js');
 
-// ✅ PUBLIC
-router.get('/read',          exampleController.read);
-router.get('/readbyPID/:id', exampleController.readbyPID);
-
-// 🔒 PROTECTED
-router.get('/readbyhandle',  auth(["admin","user"]), exampleController.readbyhandle);
-router.post('/create',       auth(["admin","user"]), exampleController.create);
-router.delete('/delete/:id', auth(["admin"]),        exampleController.delete);
+router.post('/create', auth(["admin", "user"]), submissionController.create);
+router.get('/readbyPID/:id', submissionController.readbyPID);
+router.get('/readbyhandle', auth(["admin", "user"]), submissionController.readbyhandle);
+router.get('/readbyuserhandle/:userhandle', submissionController.readByUserHandle);
+router.get('/read', submissionController.read);
+router.delete('/delete/:id', auth(["admin"]), submissionController.deleteProblem);
 
 module.exports = router;

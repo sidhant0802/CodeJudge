@@ -1,29 +1,35 @@
-const express      = require('express');
-const http         = require('http');
+const express        = require('express');
+const http           = require('http');
 const { initSocket } = require('./socket');
-const mongoose     = require('mongoose');
-const dotenv       = require('dotenv');
-const cookieParser = require('cookie-parser');
-const cors         = require('cors');
-const path         = require('path');
+const mongoose       = require('mongoose');
+const dotenv         = require('dotenv');
+const cookieParser   = require('cookie-parser');
+const cors           = require('cors');
+const path           = require('path');
 
 dotenv.config({ path: '.env' });
 
-// ── Create app & server ──
 const app    = express();
 const server = http.createServer(app);
 
-// ── Middleware ──
+// ✅ CORS — no wildcard, explicit origins
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:3000',
+  process.env.FRONTEND_URL,
+  process.env.INSTANCE_IP,
+].filter(Boolean);
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(cookieParser(process.env.CookieSecret));
 app.use(cors({
-  origin: [
-    process.env.INSTANCE_IP  || 'http://localhost:5173',
-    process.env.FRONTEND_URL || 'http://localhost:5173',
-    'http://localhost:5173',
-    'http://localhost:3000',
-    'http://localhost:5174',
-  ],
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error(`CORS blocked: ${origin}`));
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 }));
@@ -48,10 +54,9 @@ app.use('/api/savedcode',   require('./routes/savedcode'));
 app.use('/api/blogs',       require('./routes/blogRoutes'));
 app.use('/api/comments',    require('./routes/commentRoutes'));
 app.use('/api/battle',      require('./routes/battleRoutes'));
+app.use('/api/chat',        require('./routes/chatRoutes'));
 
-// ── Start Server ──
 const PORT = process.env.PORT || 5010;
 server.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`🌐 Frontend allowed: ${process.env.INSTANCE_IP}`);
 });
