@@ -408,24 +408,3 @@ git push origin feature/your-feature-name
 5. Open a Pull Request
 
 ---
-
-## Author
-
-**Sidhant Nirupam**
-
-- 🎓 B.Tech CSE @ IIT Patna (2024–2028)
-- 🏆 LeetCode Guardian — Max Rating **2163**
-- ⭐ Codeforces Specialist — Max Rating **1588**
-- 🌟 CodeChef 4-Star — Max Rating **1856**
-- 💻 Solved **2000+ problems** across platforms
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/sidhant-nirupam-a1988431a/)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-black)](https://github.com/sidhant0802)
-[![LeetCode](https://img.shields.io/badge/LeetCode-Guardian-orange)](https://leetcode.com/u/sidhant_8/)
-[![Codeforces](https://img.shields.io/badge/Codeforces-Specialist-blue)](https://codeforces.com/profile/Sidhant08)
-
----
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
